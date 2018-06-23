@@ -16,6 +16,12 @@
                 <h4 class="m-menu__section-text"> Administración de Datos </h4>
                 <i class="m-menu__section-icon flaticon-more-v3"></i>
             </li>
+            <li class="m-menu__item {!! (Request::is('usuario') || Request::is('usuario/*') ? 'm-menu__item--active':'') !!}" aria-haspopup="true">
+                <a href="{{ route('usuario.index') }}" class="m-menu__link ">
+                    <i class="m-menu__link-icon flaticon-user-settings"></i>
+                    <span class="m-menu__link-text"> Usuarios </span>
+                </a>
+            </li>
         </ul>
     </div>
     <!-- END: Aside Menu -->
