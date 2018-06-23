@@ -11,6 +11,13 @@
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+	return redirect()->route('login');
+});
+
+Auth::routes();
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/inicio', 'InicioController@index')->name('inicio');
 });
