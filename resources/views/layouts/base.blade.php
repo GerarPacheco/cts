@@ -19,10 +19,6 @@
           });
 		</script>
 		<!--end::Web font -->
-        <!--begin::Base Styles -->  
-        <!--begin::Page Vendors -->
-		<link href="{{ asset('vendors/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
-		<!--end::Page Vendors -->
 		<link href="{{ asset('vendors/base/vendors.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('css/custom.css')}}" rel="stylesheet" type="text/css" />

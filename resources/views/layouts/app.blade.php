@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8" />
         <title>
-            Sistema Médico
+            CTS
         </title>
         <meta name="description" content="Latest updates and statistic charts">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,9 +34,6 @@
 			<div class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-3" id="m_login" style="background-image: url({{asset('images/bg-2.jpg')}});">
 				<div class="m-grid__item m-grid__item--fluid	m-login__wrapper">
 					<div class="m-login__container">
-						<div class="m-login__logo">
-							CTS
-						</div>
                         @yield('content')
                     </div>
                 </div>

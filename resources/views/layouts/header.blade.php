@@ -120,7 +120,7 @@
 										<img src="{{ asset('images/default.jpg') }}" class="m--img-rounded m--marginless m--img-centered" alt=""/>
 									</span>
 									<span class="m-topbar__username m--hide">
-										{{ Auth::user()->nombre }}
+										{{ Auth::user()->name }}
 									</span>
 								</a>
 								<div class="m-dropdown__wrapper">
@@ -133,7 +133,7 @@
 												</div>
 												<div class="m-card-user__details">
 													<span class="m-card-user__name m--font-weight-500">
-														{{ Auth::user()->nombre }}
+														{{ Auth::user()->name }}
 													</span>
 													<a href="" class="m-card-user__email m--font-weight-300 m-link">
 														{{ Auth::user()->email }}
@@ -149,20 +149,6 @@
 															Section
 														</span>
 													</li>
-													<li class="m-nav__item">
-														<a href="#" class="m-nav__link">
-															<i class="m-nav__link-icon flaticon-profile-1"></i>
-															<span class="m-nav__link-title">
-																<span class="m-nav__link-wrap">
-																	<span class="m-nav__link-text">
-																		Mi Perfil
-																	</span>
-
-																</span>
-															</span>
-														</a>
-													</li>
-													<li class="m-nav__separator m-nav__separator--fit"></li>
 													<li class="m-nav__item">
 														<a href="{{ route('logout') }}" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder" onclick="event.preventDefault();
 			                                                     document.getElementById('logout-form').submit();">
