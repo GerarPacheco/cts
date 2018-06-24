@@ -7,92 +7,55 @@ use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NuevoUsuarioRequest;
-use App\Http\Requests\EditarUsuarioAdministradorRequest;
+use App\Http\Requests\EditarUsuarioRequest;
 
 class UsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $tipo_usuario=Role::all()->pluck('description','id');
         return view('usuarios.listado',compact('tipo_usuario'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(NuevoUsuarioRequest $request)
     {
         $usuario = User::create($request->except('tipo_usuario'));
+        $usuario->roles()->attach($request->tipo_usuario);
         
         return response()->json($usuario, 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
+    public function show($id)
+    {
+        return User::with('roles')->find($id);
+    }
+
+    public function edit(User $user)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $usuario)
+    public function update(EditarUsuarioRequest $request,User $usuario)
     {
-        //
+        if ($request->password != NULL) {
+            $usuario->update($request->except('tipo_usuario'));
+        }else{
+            $usuario->update($request->except('tipo_usuario','password'));
+        }
+        $role = Role::find($request->tipo_usuario);
+        $usuario->roles()->sync([$request->tipo_usuario]);
+        
+        return response()->json($usuario, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(EditarUsuarioAdministradorRequest $request, User $user)
+    public function destroy(User $usuario)
     {
-        User::findOrFail($user->id)->update($request->except('_token'));
-        return redirect()->action(
-            'Admin\UsuarioController@index'
-        )->with('exito', 'El administrador ha sido actualizado');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        User::findOrFail($user->id)->delete();
-        return redirect()->action(
-             'Admin\UsuarioController@index'
-        )->with('exito', 'El administrador ha sido eliminado');
+        $usuario->delete();
+        return response()->json(null, 204);
     }
 }
