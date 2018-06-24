@@ -64,6 +64,7 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Email</th>
+                            <th>Tipo de Usuario</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
