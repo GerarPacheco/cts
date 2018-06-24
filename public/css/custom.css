@@ -1,0 +1,13 @@
+.select2{
+	width: 100% !important;
+}
+
+.bandera{
+	background: #ccc !important;
+}
+
+.required::after{
+	content: ' * ';
+	color: red;
+	font-size: 12px;
+}

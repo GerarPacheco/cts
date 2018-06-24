@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
@@ -25,7 +30,37 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/inicio';
+
+    protected function rules()
+    {
+        return [
+            'token' => 'required',
+            'dni' => 'required',
+            'password' => 'required|confirmed|min:6',
+        ];
+    }
+
+    protected function credentials(Request $request)
+    {
+        return $request->only(
+            'dni', 'password', 'password_confirmation', 'token'
+        );
+    }
+
+    protected function resetPassword($user, $password)
+    {
+        $user->forceFill([
+            'password' => $password,
+            'remember_token' => Str::random(60),
+        ])->save();
+
+        User::where('dni','=',$user->dni)->update([
+            'ultimo_acceso' => date("Y-m-d H:i:s"),
+        ]);
+
+        $this->guard()->login($user);
+    }
 
     /**
      * Create a new controller instance.
