@@ -22,8 +22,12 @@ class DatatableController extends Controller
     }
 
     private function usuarios(){
-        $usuarios = User::all();
+        
+        $usuarios = User::with('roles');
         return Datatables::of($usuarios)
+            ->addColumn('role',function ($dato){
+                return $dato->roles()->first()->description;
+            })
             ->addColumn('action', function ($dato) {
                 $editar = route('usuario.edit',[Crypt::Encrypt($dato->id)]);
                 $ver = route('usuario.show',[Crypt::Encrypt($dato->id)]);
@@ -34,9 +38,8 @@ class DatatableController extends Controller
                             <i class="la la-ellipsis-h"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="'.$ver.'"><i class="la la-eye"></i> Ver</a>
-                            <a class="dropdown-item" href="'.$editar.'"><i class="la la-edit"></i> Editar</a>
-                            <a class="dropdown-item delete" data-url="'.$borrar.'" href="#"><i class="la la-trash"></i> Eliminar</a>
+                            <a class="dropdown-item editar" href="#" data-numero="'.$dato->id.'"><i class="la la-edit"></i> Editar</a>
+                            <a class="dropdown-item delete" href="#" data-numero="'.$dato->id.'"><i class="la la-trash"></i> Eliminar</a>
 
                         </div>
                     </span>
