@@ -20,4 +20,6 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/inicio', 'InicioController@index')->name('inicio');
+    Route::get('datatable/{model}', 'DatatableController@datatable')->name('datatable.content');
+    Route::resource('usuario', 'UsuarioController')->only('index');
 });

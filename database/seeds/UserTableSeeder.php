@@ -14,6 +14,7 @@ class UserTableSeeder extends Seeder {
 			'name' => 'Gerardo Pacheco',
 			'email' => 'gpacheco@ingebits.com',
 			'password' => '123456',
+			'telefono' => '940233114',
 		));
 		$gerardo->roles()->sync([1]);
 	
