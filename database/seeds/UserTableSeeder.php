@@ -12,7 +12,7 @@ class UserTableSeeder extends Seeder {
 		// Gerardo
 		$gerardo=User::create(array(
 			'name' => 'Gerardo Pacheco',
-			'email' => 'gpacheco@ingebits.com',
+			'email' => 'gerarpacheco@gmail.com',
 			'password' => '123456',
 			'telefono' => '940233114',
 		));
