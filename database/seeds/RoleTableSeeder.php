@@ -15,5 +15,19 @@ class RoleTableSeeder extends Seeder {
 			'display_name' => 'Administrador',
 			'description' => 'Administrador'
 		));
+
+		// Gerente
+		Role::create(array(
+			'name' => 'gerente',
+			'display_name' => 'Gerente',
+			'description' => 'Gerente'
+		));
+
+		// Gerente
+		Role::create(array(
+			'name' => 'vendedor',
+			'display_name' => 'Vendedor',
+			'description' => 'Vendedor'
+		));
 	}
 }
